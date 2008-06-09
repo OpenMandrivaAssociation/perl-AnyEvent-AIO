@@ -1,7 +1,7 @@
 
 %define realname   AnyEvent-AIO
 %define version    1.0
-%define release    %mkrel 1
+%define release    %mkrel 2
 
 Name:       perl-%{realname}
 Version:    %{version}
@@ -15,8 +15,8 @@ BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: perl-devel
 BuildRequires: perl-AnyEvent
 BuildRequires: perl-IO-AIO
-
 BuildArch: noarch
+%define _requires_exceptions Exporter
 
 %description
 
