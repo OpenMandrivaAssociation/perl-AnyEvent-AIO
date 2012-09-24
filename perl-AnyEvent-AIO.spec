@@ -1,11 +1,14 @@
 %define upstream_name    AnyEvent-AIO
 %define upstream_version 1.1
 
-%define _requires_exceptions Exporter
+# Workaround for rpm mishanding "use base Exporter::;" by creating
+# a perl(Exporter::) as opposed to perl(Exporter) requirement
+%define __noautoreq '.*Exporter::.*'
+Requires: perl(Exporter)
 
 Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 3
+Release:    4
 
 Summary:    Truly asynchronous file and directrory I/O
 License:    GPL+ or Artistic
@@ -18,7 +21,6 @@ BuildRequires: perl-IO-AIO
 BuildRequires: perl-devel
 
 BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module is an the AnyEvent manpage user, you need to make sure that you
