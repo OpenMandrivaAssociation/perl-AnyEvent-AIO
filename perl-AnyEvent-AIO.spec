@@ -1,26 +1,27 @@
 %define upstream_name    AnyEvent-AIO
 %define upstream_version 1.1
 
-# Workaround for rpm mishanding "use base Exporter::;" by creating
-# a perl(Exporter::) as opposed to perl(Exporter) requirement
-%define __noautoreq '.*Exporter::.*'
-Requires: perl(Exporter)
+%if %{_use_internal_dependency_generator}
+%define __noautoreq 'perl\\(Exporter(.*)\\)'
+%else
+%define _requires_exceptions Exporter
+%endif
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    4
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	4
 
-Summary:    Truly asynchronous file and directrory I/O
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
+Summary: 	Truly asynchronous file and directrory I/O
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl-AnyEvent
-BuildRequires: perl-IO-AIO
-BuildRequires: perl-devel
+BuildRequires:	perl-AnyEvent
+BuildRequires:	perl-IO-AIO
+BuildRequires:	perl-devel
 
-BuildArch: noarch
+BuildArch:	noarch
 
 %description
 This module is an the AnyEvent manpage user, you need to make sure that you
@@ -39,21 +40,48 @@ think this was necessary.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root)
 %doc README Changes META.yml
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Tue Apr 17 2012 Götz Waschk <waschk@mandriva.org> 1.100.0-3mdv2012.0
++ Revision: 791440
+- yearly rebuild
+
+* Sat Apr 16 2011 Funda Wang <fwang@mandriva.org> 1.100.0-2
++ Revision: 653387
+- rebuild for updated spec-helper
+
+* Wed Feb 10 2010 Jérôme Quelin <jquelin@mandriva.org> 1.100.0-1mdv2011.0
++ Revision: 503921
+- rebuild using %%perl_convert_version
+
+* Sun Aug 02 2009 Götz Waschk <waschk@mandriva.org> 1.1-1mdv2010.0
++ Revision: 407572
+- new version
+- use perl version macro
+
+* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 1.0-3mdv2009.0
++ Revision: 268362
+- rebuild early 2009.0 package (before pixel changes)
+
+* Mon Jun 09 2008 Götz Waschk <waschk@mandriva.org> 1.0-2mdv2009.0
++ Revision: 217080
+- add exception to make it installable
+
+* Mon Jun 09 2008 Götz Waschk <waschk@mandriva.org> 1.0-1mdv2009.0
++ Revision: 217056
+- import perl-AnyEvent-AIO
+
+
