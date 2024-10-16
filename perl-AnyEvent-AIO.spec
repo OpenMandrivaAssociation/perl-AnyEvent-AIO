@@ -14,7 +14,7 @@ Release:	7
 Summary: 	Truly asynchronous file and directrory I/O
 License:	GPL+ or Artistic
 Group:		Development/Perl
-Url:		http://search.cpan.org/dist/%{upstream_name}
+Url:		https://search.cpan.org/dist/%{upstream_name}
 Source0:	http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
 
 BuildRequires:	perl-IO-AIO
