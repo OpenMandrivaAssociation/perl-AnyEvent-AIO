@@ -8,14 +8,14 @@
 %endif
 
 Name:		perl-%{upstream_name}
-Version:	%perl_convert_version %{upstream_version}
-Release:	7
+Version:	%{upstream_version}
+Release:	8
 
 Summary: 	Truly asynchronous file and directrory I/O
 License:	GPL+ or Artistic
 Group:		Development/Perl
-Url:		https://search.cpan.org/dist/%{upstream_name}
-Source0:	http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
+Url:		https://metacpan.org/dist/AnyEvent-AIO
+Source0:	https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-%{upstream_version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-IO-AIO
