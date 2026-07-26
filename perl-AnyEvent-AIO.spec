@@ -1,6 +1,4 @@
 %define upstream_name    AnyEvent-AIO
-%define upstream_version 1.1
-
 %if %{_use_internal_dependency_generator}
 %define __noautoreq 'perl\\(Exporter(.*)\\)'
 %else
@@ -8,14 +6,14 @@
 %endif
 
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	8
+Version:	1.1
+Release:	9
 
 Summary: 	Truly asynchronous file and directrory I/O
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://metacpan.org/dist/AnyEvent-AIO
-Source0:	https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-IO-AIO
@@ -37,7 +35,7 @@ $AnyEvent::AIO::WATCHER'. Please notify the author of when and why you
 think this was necessary.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
@@ -65,9 +63,7 @@ perl Makefile.PL INSTALLDIRS=vendor
 
 * Wed Feb 10 2010 Jérôme Quelin <jquelin@mandriva.org> 1.100.0-1mdv2011.0
 + Revision: 503921
-- rebuild using %%perl_convert_version
-
-* Sun Aug 02 2009 Götz Waschk <waschk@mandriva.org> 1.1-1mdv2010.0
+- rebuild using %1.1 Sun Aug 02 2009 Götz Waschk <waschk@mandriva.org> 1.1-1mdv2010.0
 + Revision: 407572
 - new version
 - use perl version macro
